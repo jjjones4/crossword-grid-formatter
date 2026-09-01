@@ -1,0 +1,16 @@
+{
+  "name": "crossword-grid-formatter",
+  "version": "0.1.0",
+  "description": "Normalizes messy crossword grid text into a canonical form with precise error reporting",
+  "license": "MIT",
+  "author": "jjjones4",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "files": [
+    "dist"
+  ]
+}
