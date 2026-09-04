@@ -77,6 +77,25 @@ row has 2 cells, but the grid started with 3 cells on line 1 (line 3, column 3)
     ^
 ```
 
+## Clue numbering
+
+Once a grid is normalized, `deriveClueNumbers` works out standard clue
+numbers from the grid shape alone: a cell opens an across entry if the cell
+to its left is black (or off the grid) and the cell to its right is not, and
+symmetrically for down. A cell that opens both gets a single number shared
+by both clues, per convention.
+
+```ts
+import { formatGrid, deriveClueNumbers } from "crossword-grid-formatter";
+
+const grid = formatGrid("ABC\n#.#\nDEF");
+const numbering = deriveClueNumbers(grid);
+
+numbering.cellNumbers; // [[1, 2, null], [null, null, null], [3, null, null]]
+numbering.across;      // [{ number: 1, row: 0, col: 0, length: 3 }, { number: 3, row: 2, col: 0, length: 3 }]
+numbering.down;        // [{ number: 2, row: 0, col: 1, length: 3 }]
+```
+
 ## What counts as a valid cell
 
 - Black square: `#`, `x`, `X`, `■`, `*`, `@`
@@ -89,8 +108,8 @@ being reported as an error.
 
 ## Status
 
-Early skeleton. Parses and normalizes single grids; no clue numbering, no
-symmetry checks, no file I/O yet.
+Early skeleton. Parses and normalizes single grids, and derives clue
+numbers from grid shape. No symmetry checks, no file I/O yet.
 
 ## Install
 
