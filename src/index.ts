@@ -4,6 +4,8 @@ export { CrosswordFormatError } from "./errors.js";
 export type { SourcePosition } from "./errors.js";
 export { deriveClueNumbers } from "./numbering.js";
 export type { ClueEntry, ClueNumbering } from "./numbering.js";
+export { checkRotationalSymmetry } from "./symmetry.js";
+export type { SymmetryCheckResult, SymmetryWarning } from "./symmetry.js";
 
 import { formatGrid, stringifyGrid } from "./parser.js";
 

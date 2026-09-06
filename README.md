@@ -96,6 +96,26 @@ numbering.across;      // [{ number: 1, row: 0, col: 0, length: 3 }, { number: 3
 numbering.down;        // [{ number: 2, row: 0, col: 1, length: 3 }]
 ```
 
+## Rotational symmetry
+
+Published crosswords conventionally have 180-degree rotational symmetry in
+their black squares: rotate the grid a half turn and the black squares land
+in the same place. That's a convention, not a parsing rule, so a grid that
+breaks it still parses fine - `checkRotationalSymmetry` just reports where.
+
+```ts
+import { formatGrid, checkRotationalSymmetry } from "crossword-grid-formatter";
+
+const grid = formatGrid("#.#\n...\n#..");
+const result = checkRotationalSymmetry(grid);
+
+result.symmetric; // false
+result.warnings;  // [{ row: 2, col: 0, mirrorRow: 0, mirrorCol: 2 }]
+```
+
+Each asymmetric pair is reported once. Nothing is thrown; it's up to the
+caller to decide whether an asymmetric grid is acceptable.
+
 ## What counts as a valid cell
 
 - Black square: `#`, `x`, `X`, `■`, `*`, `@`
@@ -108,8 +128,8 @@ being reported as an error.
 
 ## Status
 
-Early skeleton. Parses and normalizes single grids, and derives clue
-numbers from grid shape. No symmetry checks, no file I/O yet.
+Early skeleton. Parses and normalizes single grids, derives clue numbers
+from grid shape, and checks rotational symmetry. No file I/O yet.
 
 ## Install
 
